@@ -1,0 +1,16 @@
+{
+  "author": "Fred Chasen <fchasen@gmail.com> (fchasen.com)",
+  "name": "cloudorchfiles",
+  "description": "Files for Cloud Orchestra",
+  "version": "0.0.0",
+  "homepage": "cloudorchestra.com",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/fchasen/Cloud-Orchestra.git"
+  },
+  "engines": {
+    "node": "~v0.4.7"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
