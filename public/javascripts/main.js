@@ -22,7 +22,7 @@ $(document).ready(function () {
           
         }
         
-      } else if ('message' in obj){
+      } else if (typeof obj != "string" && 'message' in obj){
         //console.log(obj.message[1]);
         
         $('#messages').html('<li><b>' + (obj.message[0]) + ':</b> </li>' + (obj.message[1]) + $('#messages').html());
@@ -50,7 +50,7 @@ $(document).ready(function () {
         console.log(obj.message);
         
         
-      } else if ('message' in obj){
+      } else if (typeof obj != "string" && 'message' in obj){
         //console.log(obj.message[1]);
         
         $('#messages').html('<li><b>' + (obj.message[0]) + ':</b> </li>' + (obj.message[1]) + $('#messages').html());
