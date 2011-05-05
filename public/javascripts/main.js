@@ -3,6 +3,9 @@ $(document).ready(function () {
     wWidth = parseInt($(window).width());
     
     canvas = Raphael("clouds", wWidth, wHeight);
+    
+    infoCloud = canvas.infocloud(300, 300);
+    
     clouds = [];
     myCloud = canvas.cloud(300, 300);
     myCloud.spawn();

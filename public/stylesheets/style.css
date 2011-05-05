@@ -1,5 +1,17 @@
 body {
   background: #8D97A0;
+  background-image: -webkit-gradient(
+     linear,
+     55 bottom,
+     left top,
+     color-stop(0.16, rgb(109,160,176)),
+     color-stop(0.86, #a3b9c7)
+  );
+  background-image: -moz-linear-gradient(
+     55 bottom,
+     rgb(184,208,224) 16%,
+     rgb(109,160,176) 86%
+  );
   color: #fff;
   margin: 0;
   padding: 0;
@@ -12,8 +24,77 @@ a {
 
 #logo {
   position: absolute;
+  left: 5px;
+  bottom: -35px;
+}
+
+#earth {
+  position: absolute;
+  left: 300px;
+  top: 200px;
+  background: url("../images/earth.png");
+  width: 610px;
+  height: 610px;
+  z-index: -1;
+}
+
+#picker {
+  position: absolute;
   left: 10px;
   top: 10px;
+  
+}
+
+#pickhint {
+  position: absolute;
+  left: 15px;
+  top: 50px;
+  background: url("../images/pick.png");
+  width: 175px;
+   height: 200px;
+   opacity: .7;
+}
+
+#pickhint:hover {
+   opacity: 1;
+}
+
+#picker select {
+  font-size: 24px;
+}
+
+#keyLeft {
+  position: absolute;
+  left: 10px;
+  top: 355px;
+  width: 80px;
+  opacity: .5;
+
+}
+
+#keyLeft:hover, #keyRight:hover{
+  opacity: 1;
+}
+
+#keyRight {
+  position: absolute;
+  right: 5px;
+  top: 355px;
+  width: 80px;
+  opacity: .5;
+  
+}
+
+
+.press {
+  height: 70px;
+  overflow: hidden;
+  margin-bottom: 5px;
+  
+}
+
+.press:hover img {
+  margin-top: -70px;
 }
 
 .tab {

@@ -1,20 +1,32 @@
-h1#logo= title
+h1#logo
+  image(src:"/images/clouldo.png")
 
 #clouds
 
-#left
-  #one.tab
-    a(href="#") Tom-Tom
-  #two.tab
-    a(href="javascript:play_multi_sound('multiaudio2');") Tom-Tom2
-  #three.tab
-    a(href="javascript:play_multi_sound('multiaudio3');") Whistle
-    
-#right
-  #four.tab
-  #five.tab
-  #six.tab
+#earth
+  
+#picker
+  select
+    option(value="volvo") Volvo
+    option(value="volvo") Volvo
+    option(value="volvo") Volvo
+#pickhint
 
+#keyLeft
+  .press
+    img(src="images/key1.png")
+  .press
+    img(src="images/key2.png")
+  .press
+    img(src="images/key3.png")
+  
+#keyRight
+  .press
+    img(src="images/key4.png")
+  .press
+    img(src="images/key5.png")
+  .press
+    img(src="images/key6.png")
 #log
   input(type='text')
   ul#messages
