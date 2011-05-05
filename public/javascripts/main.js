@@ -68,7 +68,7 @@ $(document).ready(function () {
       
     
     
-    var socket = new io.Socket(null, {rememberTransport: false, port: 8080});
+    var socket = new io.Socket(null, {rememberTransport: false});
     socket.on('connect', function () {
         socket.send('connected Tuba');
     });
