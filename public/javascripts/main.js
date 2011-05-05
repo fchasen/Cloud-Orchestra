@@ -73,9 +73,14 @@ $(document).ready(function () {
         socket.send('connected Tuba');
     });
     socket.on('message', function (obj) {
-      if ('buffer' in obj){
-        for (var i in obj.buffer) buffer_message(obj.buffer[i]);
-      } else message(obj);
+      if(typeof obj != "string"){
+        if ('buffer' in obj){
+          for (var i in obj.buffer) buffer_message(obj.buffer[i]);
+        } else message(obj);
+      }else{
+        message(obj)
+      }
+      
       //console.log(message);
         //$('div#messages').html('<p>' + message + '</p>' + $('div#messages').html());
     });
