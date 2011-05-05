@@ -12,7 +12,7 @@ $(document).ready(function () {
     clouds['me'] = myCloud;
     
     function message(obj){
-      if ('announcement' in obj){
+      if (typeof obj != "string" && 'announcement' in obj){
         $('#messages').html('<li><em>' + (obj.announcement) + '</em></li>'+ $('#messages').html());
         
         if(obj.announcement.search('disconnected') != -1){
@@ -45,7 +45,7 @@ $(document).ready(function () {
     }
     
     function buffer_message(obj){
-      if ('announcement' in obj){
+      if (typeof obj != "string" && 'announcement' in obj){
         $('#messages').html('<li><em>' + (obj.announcement) + '</em></li>'+ $('#messages').html());
         console.log(obj.message);
         
