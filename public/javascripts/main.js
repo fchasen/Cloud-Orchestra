@@ -1,86 +1,62 @@
+var socket;
+var instrument = "tom-toms";
+
 $(document).ready(function () {
     wHeight = parseInt($(window).height());
     wWidth = parseInt($(window).width());
     
     canvas = Raphael("clouds", wWidth, wHeight);
-    
-    infoCloud = canvas.infocloud(300, 300);
-    
+        
     clouds = [];
-    myCloud = canvas.cloud(300, 300);
-    myCloud.spawn();
-    clouds['me'] = myCloud;
+    myCloud = new cloud(canvas, 0);
+    myCloud.spawn(true);
+    clouds.push(myCloud);
     
     function message(obj){
-      if (typeof obj != "string" && 'announcement' in obj){
-        $('#messages').html('<li><em>' + (obj.announcement) + '</em></li>'+ $('#messages').html());
-        
-        if(obj.announcement.search('disconnected') != -1){
-          
-          
-          clouds[obj.announcement.substring(0, 16)].remove();
-          
+      if ('disconnected' in obj){
+        if(clouds[obj.disconnected[0]]){
+          clouds[obj.disconnected[0]].remove();
         }
+      }    
+      
+      if ('connected' in obj){
+        var newCloud = new cloud(canvas, obj.connected[0]);
+        newCloud.spawn();
+        clouds[obj.connected[0]] = newCloud;
+      }  
         
-      } else if (typeof obj != "string" && 'message' in obj){
+      if ('message' in obj){
         //console.log(obj.message[1]);
         
         $('#messages').html('<li><b>' + (obj.message[0]) + ':</b> </li>' + (obj.message[1]) + $('#messages').html());
-        
-        if(obj.message[1].search('connected') != -1){
-          var newCloud = canvas.cloud(obj.message[0],obj.message[1]);
-          newCloud.spawn();
-          if(obj.message[0]){
-            clouds[obj.message[0]] = newCloud;
-          }
+        if(clouds[obj.message[0]]){
+          clouds[obj.message[0]].soundoff(obj.message[1]);
         }
-        
-        if(obj.message[1].search('played') != -1){
-          if(obj.message){
-            clouds[obj.message[0]].soundoff();
-          }
-        }
-      } 
+      }
       
     }
     
-    function buffer_message(obj){
-      if (typeof obj != "string" && 'announcement' in obj){
-        $('#messages').html('<li><em>' + (obj.announcement) + '</em></li>'+ $('#messages').html());
-        console.log(obj.message);
-        
-        
-      } else if (typeof obj != "string" && 'message' in obj){
-        //console.log(obj.message[1]);
-        
-        $('#messages').html('<li><b>' + (obj.message[0]) + ':</b> </li>' + (obj.message[1]) + $('#messages').html());
-        
-        if(obj.message[1].search('connected') != -1){
-          var newCloud = canvas.cloud(obj.message[0],obj.message[1]);
-          newCloud.spawn();
-          if(obj.message[0]){
-            clouds[obj.message[0]] = newCloud;
-          }
-        }
-        
-        }
-    } 
       
+    function spawnClouds(id){
+       var newCloud = new cloud(canvas, id);
+       newCloud.spawn();
+       clouds[id] = newCloud;
+    }
     
-    
-    var socket = new io.Socket(null, {rememberTransport: false});
+    socket = new io.Socket(null, {rememberTransport: false});
     socket.on('connect', function () {
-        socket.send('connected Tuba');
+        //socket.send('connected Tuba');
     });
     socket.on('message', function (obj) {
-      if(typeof obj != "string"){
-        if ('buffer' in obj){
-          for (var i in obj.buffer) buffer_message(obj.buffer[i]);
-        } else message(obj);
-      }else{
-        message(obj)
+      if ('buffer' in obj){
+        for (var i in obj.buffer) message(obj.buffer[i]);
+      } else message(obj);
+
+      if ('clientsBuffer' in obj){
+        for (var i in obj.clientsBuffer) {
+            spawnClouds(obj.clientsBuffer[i]);
+        }
       }
-      
       //console.log(message);
         //$('div#messages').html('<p>' + message + '</p>' + $('div#messages').html());
     });
@@ -103,10 +79,10 @@ $(document).ready(function () {
     //audio
     
       
-    $("#one a").click(function(){
-      
-      clouds['me'].soundoff();
-      socket.send("played");
+    $("#key-one").click(function(){
+     
+      myCloud.soundoff(instrument+"_1");
+      socket.send(instrument+"_1");
       //console.log(clouds)
     });
 });
@@ -129,5 +105,4 @@ var channel_max = 10;                   // number of channels
         break;
       }
     }
-    
   }

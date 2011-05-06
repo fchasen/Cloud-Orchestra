@@ -38,18 +38,34 @@ app.get('/', function(req, res){
 // Only listen on $ node app.js
 
 if (!module.parent) {
-  app.listen(8124);
+  app.listen(808);
   console.log("Express server listening on port %d", app.address().port);
 }
 
 //app.listen(8080);
 
-var socket = io.listen(app);
+var io = io.listen(app)
+  , buffer = []
+  , cBuffer = [];;
+  
+io.on('connection', function(client){
+  client.send({ buffer: buffer });
+  client.send({ clientsBuffer: cBuffer });
+  client.broadcast({ connected: [client.sessionId, 'connected'] });
+  
+  client.on('message', function(message){
+    var msg = { message: [client.sessionId, message] };
+    buffer.push(msg);
+    if (buffer.length > 15) buffer.shift();
+    client.broadcast(msg);
+  });
 
-socket.on('connection', function (client) {
-    client.on('message', function (message) {
-        socket.broadcast(message);
-    });
-    client.on('disconnect', function () {
-    });
+  client.on('disconnect', function(){
+    client.broadcast({ disconnected: [client.sessionId, 'disconnected'] });
+    cBuffer.splice(cBuffer.indexOf(client.sessionId),1);
+  });
+  
+  cBuffer.push(client.sessionId);
+  
+  
 });
