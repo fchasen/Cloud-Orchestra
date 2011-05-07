@@ -1,14 +1,42 @@
 var socket;
-var instrument = "tom-toms";
+var instrument = "violin";
+var wHeight;
+var wWidth;
+var earthSize = 610;
 
 $(document).ready(function () {
-    wHeight = parseInt($(window).height());
-    wWidth = parseInt($(window).width());
+    
+    
+    visual();
+    
+    $(".press").click(function(){
+      $("#pickhint").fadeOut('slow');
+    });
+    $("#picker").change(function(){
+      instrument = $("#picker option:selected").val();
+      $("#pickhint").fadeOut('slow');
+    })
+    
+    $("#credit-a").click(function(){
+      $("#credits").fadeIn('slow');
+    });
+    
+    $("#about-a").click(function(){
+      $("#about").fadeIn('slow');
+    });
+    
+    $("#close-about").click(function(){
+      $("#about").fadeOut('slow');
+    });
+    
+    $("#close-credit").click(function(){
+      $("#credits").fadeOut('slow');
+    });
     
     canvas = Raphael("clouds", wWidth, wHeight);
         
     clouds = [];
-    myCloud = new cloud(canvas, 0);
+    myCloud = new cloud(canvas, 0, instrument);
     myCloud.spawn(true);
     clouds.push(myCloud);
     
@@ -38,7 +66,7 @@ $(document).ready(function () {
     
       
     function spawnClouds(id){
-       var newCloud = new cloud(canvas, id);
+       var newCloud = new cloud(canvas, id, instrument);
        newCloud.spawn();
        clouds[id] = newCloud;
     }
@@ -64,12 +92,66 @@ $(document).ready(function () {
     });
     socket.connect();
 
-    $('input').keydown(function (event) {
-        if(event.keyCode === 13) {
-            var val = $('input').val();
-            socket.send(val);
-            message({ message: ['you', val] });
-            $('input').val('');
+    $(document).keydown(function (event) {
+        $("#pickhint").fadeOut('slow');
+        if(event.keyCode === 49) {
+            var play = instrument+"_1";
+            myCloud.soundoff(play);
+            socket.send(play);
+            $("#key-one").addClass("active");
+            var onepress = window.setTimeout(function() {
+                $("#key-one").removeClass("active");
+            }, 200);
+        }
+        
+        if(event.keyCode === 50) {
+            var play = instrument+"_2";
+            myCloud.soundoff(play);
+            socket.send(play);
+            $("#key-two").addClass("active");
+            window.setTimeout(function() {
+                $("#key-two").removeClass("active");
+            }, 200);
+        }
+        
+        if(event.keyCode === 51) {
+            var play = instrument+"_3";
+            myCloud.soundoff(play);
+            socket.send(play);
+            $("#key-three").addClass("active");
+            window.setTimeout(function() {
+                $("#key-three").removeClass("active");
+            }, 200);
+        }
+        
+        if(event.keyCode === 56) {
+            var play = instrument+"_4";
+            myCloud.soundoff(play);
+            socket.send(play);
+            $("#key-four").addClass("active");
+            window.setTimeout(function() {
+                $("#key-four").removeClass("active");
+            }, 200);
+        }
+        
+        if(event.keyCode === 57) {
+            var play = instrument+"_5";
+            myCloud.soundoff(play);
+            socket.send(play);
+            $("#key-five").addClass("active");
+            window.setTimeout(function() {
+                $("#key-five").removeClass("active");
+            }, 200);
+        }
+        
+        if(event.keyCode === 48) {
+            var play = instrument+"_6";
+            myCloud.soundoff(play);
+            socket.send(play);
+            $("#key-six").addClass("active");
+            window.setTimeout(function() {
+                $("#key-six").removeClass("active");
+            }, 200);
         }
     });
     
@@ -79,11 +161,41 @@ $(document).ready(function () {
     //audio
     
       
-    $("#key-one").click(function(){
-     
-      myCloud.soundoff(instrument+"_1");
-      socket.send(instrument+"_1");
-      //console.log(clouds)
+    $("#key-one").click(function(e){
+      e.preventDefault();
+      var play = instrument+"_1";
+      myCloud.soundoff(play);
+      socket.send(play);
+    });
+    $("#key-two").click(function(e){
+      e.preventDefault();
+      var play = instrument+"_2";
+      myCloud.soundoff(play);
+      socket.send(play);
+    });
+    $("#key-three").click(function(e){
+      e.preventDefault();
+      var play = instrument+"_3";
+      myCloud.soundoff(play);
+      socket.send(play);
+    });
+    $("#key-four").click(function(e){
+      e.preventDefault();
+      var play = instrument+"_4";
+      myCloud.soundoff(play);
+      socket.send(play);
+    });
+    $("#key-five").click(function(e){
+      e.preventDefault();
+      var play = instrument+"_5";
+      myCloud.soundoff(play);
+      socket.send(play);
+    });
+    $("#key-six").click(function(e){
+      e.preventDefault();
+      var play = instrument+"_6";
+      myCloud.soundoff(play);
+      socket.send(play);
     });
 });
 
@@ -106,3 +218,30 @@ var channel_max = 10;                   // number of channels
       }
     }
   }
+  
+function visual(){
+   //visual
+    wHeight = parseInt($(window).height());
+    wWidth = parseInt($(window).width());
+    
+    
+    
+    if(wHeight < 750 && wHeight > 601){
+      $("#earth").css("background-image", "url(images/earth-mid.png) ");
+      earthSize = 450;
+      $("#earth").css("margin-left", -225);
+      $("#earth").css("margin-top", -225);
+    }
+    if(wHeight < 601){
+      $("#earth").css("background-image", "url(images/earth-sm.png) ");
+      earthSize = 360;
+      $("#earth").css("margin-left", -180);
+      $("#earth").css("margin-top", -180);
+    }
+    //$("#earth").css("left", $(window).width()/2-earthSize/2);
+    //$("#earth").css("top", $(window).height()/2-earthSize/2);
+}
+
+$(window).resize(function() {
+   visual();
+});

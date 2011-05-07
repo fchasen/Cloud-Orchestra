@@ -7,32 +7,111 @@ h1#logo
   
 #picker
   select
-    option(value="volvo") Volvo
-    option(value="volvo") Volvo
-    option(value="volvo") Volvo
+    option(value="violin") Violin
+    option(value="bass") Bass
+    option(value="flute") Flute
+    option(value="clarinet") Clarinet
+    option(value="trumpet") Trumpet
+    option(value="percussion") Percussion
+
 #pickhint
 
+#about
+  h2 Your Browser is Your Instrument
+  h3
+    a(href="#", id="close-about") Close
+#credits
+  h2 Cloud Orchestra 
+  h3 was created by 
+    a(href = "http://fchasen.com") Fred Chasen
+    span &nbsp;for   
+    a(href = "http://contest.beautyoftheweb.com/") Dev: Unplugged
+  
+  h3 A Big Thanks To
+  p
+    a(href = "http://raphaeljs.com/") Raphaël—JavaScript Library
+    a(href = "http://www.philharmonia.co.uk/thesoundexchange/") Philharmonia Sound Exchange
+  h3
+    a(href="#", id="close-credit") Close
+    
+#sm-credit
+  span Created by 
+  a(href = "http://fchasen.com") Fred Chasen
+  span &nbsp;for   
+  a(href = "http://contest.beautyoftheweb.com/") Dev: Unplugged
+
+#links
+  a(href="#", id="about-a") About
+  &nbsp;&nbsp;|&nbsp;
+  a(href="#", id="credit-a") Credits
+  &nbsp;
 #keyLeft
   #key-one.press
-    img(src="images/key1.png")
-  .press
-    img(src="images/key2.png")
-  .press
-    img(src="images/key3.png")
+    a(href="#") 
+      img(src="images/key1.png")
+  #key-two.press
+    a(href="#")
+      img(src="images/key2.png")
+  #key-three.press
+    a(href="#")
+      img(src="images/key3.png")
   
 #keyRight
-  .press
-    img(src="images/key4.png")
-  .press
-    img(src="images/key5.png")
-  .press
-    img(src="images/key6.png")
-#log
-  input(type='text')
+  #key-four.press
+    a(href="") 
+      img(src="images/key4.png")
+  #key-five.press
+    a(href="#")
+      img(src="images/key5.png")
+  #key-six.press
+    a(href="#")
+      img(src="images/key6.png")
+#log(style="display:none")
+  //input(type='text')
   ul#messages
   
 #audio
-  audio(id="tom-toms_1", src="audio/tom-toms_1.mp3", preload="auto")
-  audio(id="multiaudio2", src="audio/tom-toms_2.mp3", preload="auto")
+  audio(id="bass_1", src="http://audio.cloudorchestra.com/bass/bass_1.mp3", preload="auto")
+  audio(id="bass_2", src="http://audio.cloudorchestra.com/bass/bass_2.mp3", preload="auto")
+  audio(id="bass_3", src="http://audio.cloudorchestra.com/bass/bass_3.mp3", preload="auto")
+  audio(id="bass_4", src="http://audio.cloudorchestra.com/bass/bass_4.mp3", preload="auto")
+  audio(id="bass_5", src="http://audio.cloudorchestra.com/bass/bass_5.mp3", preload="auto")
+  audio(id="bass_6", src="http://audio.cloudorchestra.com/bass/bass_6.mp3", preload="auto")
+  
+  audio(id="clarinet_1", src="http://audio.cloudorchestra.com/clarinet/clarinet_1.mp3", preload="auto")
+  audio(id="clarinet_2", src="http://audio.cloudorchestra.com/clarinet/clarinet_2.mp3", preload="auto")
+  audio(id="clarinet_3", src="http://audio.cloudorchestra.com/clarinet/clarinet_3.mp3", preload="auto")
+  audio(id="clarinet_4", src="http://audio.cloudorchestra.com/clarinet/clarinet_4.mp3", preload="auto")
+  audio(id="clarinet_5", src="http://audio.cloudorchestra.com/clarinet/clarinet_5.mp3", preload="auto")
+  audio(id="clarinet_6", src="http://audio.cloudorchestra.com/clarinet/clarinet_6.mp3", preload="auto")
+  
+  audio(id="flute_1", src="http://audio.cloudorchestra.com/flute/flute_1.mp3", preload="auto")
+  audio(id="flute_2", src="http://audio.cloudorchestra.com/flute/flute_2.mp3", preload="auto")
+  audio(id="flute_3", src="http://audio.cloudorchestra.com/flute/flute_3.mp3", preload="auto")
+  audio(id="flute_4", src="http://audio.cloudorchestra.com/flute/flute_4.mp3", preload="auto")
+  audio(id="flute_5", src="http://audio.cloudorchestra.com/flute/flute_5.mp3", preload="auto")
+  audio(id="flute_6", src="http://audio.cloudorchestra.com/flute/flute_6.mp3", preload="auto")
+  
+  audio(id="percussion_1", src="http://audio.cloudorchestra.com/percussion/percussion_1.mp3", preload="auto")
+  audio(id="percussion_2", src="http://audio.cloudorchestra.com/percussion/percussion_2.mp3", preload="auto")
+  audio(id="percussion_3", src="http://audio.cloudorchestra.com/percussion/percussion_3.mp3", preload="auto")
+  audio(id="percussion_4", src="http://audio.cloudorchestra.com/percussion/percussion_4.mp3", preload="auto")
+  audio(id="percussion_5", src="http://audio.cloudorchestra.com/percussion/percussion_5.mp3", preload="auto")
+  audio(id="percussion_6", src="http://audio.cloudorchestra.com/percussion/percussion_6.mp3", preload="auto")
+  
+  audio(id="trumpet_1", src="http://audio.cloudorchestra.com/trumpet/trumpet_1.mp3", preload="auto")
+  audio(id="trumpet_2", src="http://audio.cloudorchestra.com/trumpet/trumpet_2.mp3", preload="auto")
+  audio(id="trumpet_3", src="http://audio.cloudorchestra.com/trumpet/trumpet_3.mp3", preload="auto")
+  audio(id="trumpet_4", src="http://audio.cloudorchestra.com/trumpet/trumpet_4.mp3", preload="auto")
+  audio(id="trumpet_5", src="http://audio.cloudorchestra.com/trumpet/trumpet_5.mp3", preload="auto")
+  audio(id="trumpet_6", src="http://audio.cloudorchestra.com/trumpet/trumpet_6.mp3", preload="auto")
+  
+  audio(id="violin_1", src="http://audio.cloudorchestra.com/violin/violin_1.mp3", preload="auto")
+  audio(id="violin_2", src="http://audio.cloudorchestra.com/violin/violin_2.mp3", preload="auto")
+  audio(id="violin_3", src="http://audio.cloudorchestra.com/violin/violin_3.mp3", preload="auto")
+  audio(id="violin_4", src="http://audio.cloudorchestra.com/violin/violin_4.mp3", preload="auto")
+  audio(id="violin_5", src="http://audio.cloudorchestra.com/violin/violin_5.mp3", preload="auto")
+  audio(id="violin_6", src="http://audio.cloudorchestra.com/violin/violin_6.mp3", preload="auto")
+  
   audio(id="multiaudio3", src="audio/154_swanee-whistle_999_6_9_48.mp3", preload="auto")
   
