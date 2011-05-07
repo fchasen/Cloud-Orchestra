@@ -2,10 +2,13 @@ var socket;
 var instrument = "violin";
 var wHeight;
 var wWidth;
-var earthSize = 610;
+var earthSize = 600;
+var earthimg, bggrad;
 
 $(document).ready(function () {
     
+    wHeight = $(window).height();
+    wWidth = $(window).width();
     
     visual();
     
@@ -34,7 +37,10 @@ $(document).ready(function () {
     });
     
     canvas = Raphael("clouds", wWidth, wHeight);
-        
+    bggrad = canvas.rect(0, 0, wWidth, wHeight).attr({fill:"86-#6da0b0:55-#a3b9c7", stroke:"none"});
+
+    earthimg = canvas.image("images/earth.png", wWidth/2-earthSize/2, wHeight/2-earthSize/2, earthSize, earthSize);
+        //r(0.25, 0.75)#fff-#000
     clouds = [];
     myCloud = new cloud(canvas, 0, instrument);
     myCloud.spawn(true);
@@ -221,22 +227,35 @@ var channel_max = 10;                   // number of channels
   
 function visual(){
    //visual
-    wHeight = parseInt($(window).height());
-    wWidth = parseInt($(window).width());
+    wHeight = $(window).height();
+    wWidth = $(window).width();
     
     
     
     if(wHeight < 750 && wHeight > 601){
-      $("#earth").css("background-image", "url(images/earth-mid.png) ");
+      //$("#earth").css("background-image", "url(images/earth-mid.png) ");
       earthSize = 450;
-      $("#earth").css("margin-left", -225);
-      $("#earth").css("margin-top", -225);
+           // $("#earth").css("margin-left", -225);
+      // $("#earth").css("margin-top", -225);
     }
     if(wHeight < 601){
-      $("#earth").css("background-image", "url(images/earth-sm.png) ");
+      //$("#earth").css("background-image", "url(images/earth-sm.png) ");
       earthSize = 360;
-      $("#earth").css("margin-left", -180);
-      $("#earth").css("margin-top", -180);
+      
+      // $("#earth").css("margin-left", -180);
+      //     $("#earth").css("margin-top", -180);
+    }
+    
+    if(wHeight > 750){
+      earthSize = 600;
+      
+    }
+    
+    if(typeof canvas != 'undefined'){
+      canvas.setSize(wWidth, wHeight);
+      bggrad.attr({width: wWidth, height: wHeight});
+      earthimg.attr({ x: wWidth/2-earthSize/2, y: wHeight/2-earthSize/2, width: earthSize, height: earthSize });
+      
     }
     //$("#earth").css("left", $(window).width()/2-earthSize/2);
     //$("#earth").css("top", $(window).height()/2-earthSize/2);

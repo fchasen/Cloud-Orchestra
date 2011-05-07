@@ -33,6 +33,7 @@ body {
 
 a {
   text-decoration: none;
+  
 }
 
 a:hover {
@@ -152,7 +153,6 @@ p a{
 }
 
 #picker select {
-  font-size: 24px;
 }
 
 #keyLeft {
@@ -189,6 +189,9 @@ p a{
   
 }
 
+.press a img{
+  border: none;
+}
 .press a:active img {
   margin-top: -70px;
 }
