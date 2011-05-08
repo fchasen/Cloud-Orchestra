@@ -41,7 +41,6 @@ function cloud(R, id, type) {
         chart.click(function () {
            // socket.send("played");
            cl.showSound();
-           
            play_multi_sound(sound);
          });
          
@@ -70,8 +69,8 @@ function cloud(R, id, type) {
            chart.remove();
       }
       
-      this.setType = function (t){
-           type = t; 
+      this.setSound = function (t){
+           sound = t+"_1"; 
       }
 
         

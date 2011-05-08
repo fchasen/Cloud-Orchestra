@@ -4,6 +4,16 @@ var wHeight;
 var wWidth;
 var earthSize = 600;
 var earthimg, bggrad;
+var audioType = ".mp3";
+
+var sounds = [
+  "bass",
+  "clarinet",
+  "flute",
+  "percussion",
+  "trumpet",
+  "violin"
+];
 
 $(document).ready(function () {
     
@@ -12,20 +22,45 @@ $(document).ready(function () {
     
     visual();
     
+    var a = new Audio();
+    if(a.canPlayType){ 
+      
+      if(!a.canPlayType('audio/mpeg;') && a.canPlayType('audio/ogg; codecs="vorbis"')){
+        audioType = ".oga";
+      }
+      
+      $.each(sounds, function(index, value) {
+        for(i=1;i<=6;i++){
+            var na = new Audio();
+            na.id = value+"_"+i;
+            na.src = "http://audio.cloudorchestra.com/"+value+"/"+value+"_"+i+audioType;
+            na.preload="auto";
+            
+            $("#audio").append(na);
+            na.load();
+        }
+      });
+      
+      
+    }
+    
     $(".press").click(function(){
       $("#pickhint").fadeOut('slow');
     });
     $("#picker").change(function(){
       instrument = $("#picker option:selected").val();
+      myCloud.setSound(instrument);
       $("#pickhint").fadeOut('slow');
     })
     
     $("#credit-a").click(function(){
       $("#credits").fadeIn('slow');
+      $("#about").fadeOut();
     });
     
     $("#about-a").click(function(){
       $("#about").fadeIn('slow');
+      $("#credits").fadeOut();
     });
     
     $("#close-about").click(function(){
@@ -165,39 +200,43 @@ $(document).ready(function () {
     //cloud = canvas.cloud(300, 300, 40).spawn();
     
     //audio
-    
-      
-    $("#key-one").click(function(e){
+    var input;
+    if (window.Touch) {
+      input = "touchstart";
+    }else{
+      input = "mouseup";
+    }    
+    $("#key-one").bind(input,function(e){
       e.preventDefault();
       var play = instrument+"_1";
       myCloud.soundoff(play);
       socket.send(play);
     });
-    $("#key-two").click(function(e){
+    $("#key-two").bind(input,function(e){
       e.preventDefault();
       var play = instrument+"_2";
       myCloud.soundoff(play);
       socket.send(play);
     });
-    $("#key-three").click(function(e){
+    $("#key-three").bind(input,function(e){
       e.preventDefault();
       var play = instrument+"_3";
       myCloud.soundoff(play);
       socket.send(play);
     });
-    $("#key-four").click(function(e){
+    $("#key-four").bind(input,function(e){
       e.preventDefault();
       var play = instrument+"_4";
       myCloud.soundoff(play);
       socket.send(play);
     });
-    $("#key-five").click(function(e){
+    $("#key-five").bind(input,function(e){
       e.preventDefault();
       var play = instrument+"_5";
       myCloud.soundoff(play);
       socket.send(play);
     });
-    $("#key-six").click(function(e){
+    $("#key-six").bind(input,function(e){
       e.preventDefault();
       var play = instrument+"_6";
       myCloud.soundoff(play);

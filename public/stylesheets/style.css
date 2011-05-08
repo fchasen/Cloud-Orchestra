@@ -85,20 +85,20 @@ p a{
   position: absolute;
   left: 50%;
   top: 50%;
-  margin-left: -300px;
-  margin-top: -200px;
+  margin-left: -250px;
+  margin-top: -150px;
   
   background: #e4e9ed ;
-  width: 600px;
-  height: 400px;
+  width: 500px;
+  height: 300px;
   z-index: 10;
   
   -moz-border-radius: 15px;
   border-radius: 15px;
   
-  -moz-box-shadow: 10px 10px 5px #888;
+  -moz-box-shadow: 1px 1px 20px rgba(141,151,160,30);
   box-shadow: 1px 1px 20px rgba(141,151,160,30);
-  
+  padding: 15px;
   display: none;
 }
 
