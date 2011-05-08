@@ -66,6 +66,11 @@ p a{
   color: #323d44;
   margin-top: 10px;
 }
+
+p {
+  color: #50626d;
+  font-size: 13px;
+}
 #earth {
   position: absolute;
 
