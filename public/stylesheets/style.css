@@ -107,6 +107,13 @@ p {
   display: none;
 }
 
+#enableSound {
+  font-size: 24px;
+}
+
+#button {
+  font-size: 48px;
+}
 #sm-credit {
   position: absolute;
   right: 10px;

@@ -206,7 +206,7 @@ $(document).ready(function () {
     if (window.Touch) {
       input = "touchstart";
       
-      $("#enableSound").html('<input id="button" type="button" value="Enable Sounds" onclick="soundToggle()">').fadeIn();
+      $("#enableSound").fadeIn();
       $("#button").click(function(){
         $("#enableSound").fadeOut();
       });
@@ -276,7 +276,7 @@ $(document).ready(function () {
       
       if (window.Touch) {
         play_multi_sound = function(s) {
-          audioM.src = "http://audio.cloudorchestra.com/"+s.substring(0,s.search('_'))+"/"+s+audioType;
+          audioM.src = "http://audio.cloudorchestra.com/"+s+audioType;
           audioM.play();
         }
       }
