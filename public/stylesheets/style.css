@@ -86,7 +86,7 @@ p {
   margin-top: -305px;
 }
 
-#credits, #about {
+#credits, #about, #enableSound {
   position: absolute;
   left: 50%;
   top: 50%;

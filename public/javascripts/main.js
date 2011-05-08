@@ -5,6 +5,8 @@ var wWidth;
 var earthSize = 600;
 var earthimg, bggrad;
 var audioType = ".mp3";
+var play_multi_sound;
+var audioM;
 
 var sounds = [
   "bass",
@@ -203,8 +205,16 @@ $(document).ready(function () {
     var input;
     if (window.Touch) {
       input = "touchstart";
+      
+      $("#enableSound").html('<input id="button" type="button" value="Enable Sounds" onclick="soundToggle()">').fadeIn();
+      $("#button").click(function(){
+        $("#enableSound").fadeOut();
+      });
+      
     }else{
       input = "mouseup";
+      
+      //$("#enableSound").html('<input id="button" type="button" value="Enable Sounds" onclick="soundToggle()">').fadeIn();
     }    
     $("#key-one").bind(input,function(e){
       e.preventDefault();
@@ -242,27 +252,41 @@ $(document).ready(function () {
       myCloud.soundoff(play);
       socket.send(play);
     });
+    
+    var channel_max = 10;                   // number of channels
+      audiochannels = new Array();
+      for (a=0;a<channel_max;a++) {                 // prepare the channels
+        audiochannels[a] = new Array();
+        audiochannels[a]['channel'] = new Audio();            // create a new audio object
+        audiochannels[a]['finished'] = -1;              // expected end time for this channel
+      }
+
+      play_multi_sound = function(s) {
+        for (a=0;a<audiochannels.length;a++) {
+          thistime = new Date();
+          if (audiochannels[a]['finished'] < thistime.getTime()) {      // is this channel finished?
+            audiochannels[a]['finished'] = thistime.getTime() + document.getElementById(s).duration*1000;
+            audiochannels[a]['channel'].src = document.getElementById(s).src;
+            audiochannels[a]['channel'].load();
+            audiochannels[a]['channel'].play();
+            break;
+          }
+        }
+      }
+      
+      if (window.Touch) {
+        play_multi_sound = function(s) {
+          audioM.src = "http://audio.cloudorchestra.com/"+s.substring(0,s.search('_'))+"/"+s+audioType;
+          audioM.play();
+        }
+      }
 });
 
-var channel_max = 10;                   // number of channels
-  audiochannels = new Array();
-  for (a=0;a<channel_max;a++) {                 // prepare the channels
-    audiochannels[a] = new Array();
-    audiochannels[a]['channel'] = new Audio();            // create a new audio object
-    audiochannels[a]['finished'] = -1;              // expected end time for this channel
-  }
-  function play_multi_sound(s) {
-    for (a=0;a<audiochannels.length;a++) {
-      thistime = new Date();
-      if (audiochannels[a]['finished'] < thistime.getTime()) {      // is this channel finished?
-        audiochannels[a]['finished'] = thistime.getTime() + document.getElementById(s).duration*1000;
-        audiochannels[a]['channel'].src = document.getElementById(s).src;
-        audiochannels[a]['channel'].load();
-        audiochannels[a]['channel'].play();
-        break;
-      }
-    }
-  }
+function soundToggle() {
+     audioM = document.getElementById("audioMobile");
+     audioM.load();
+}
+
   
 function visual(){
    //visual
